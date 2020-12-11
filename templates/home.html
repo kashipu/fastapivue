@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <textarea name="" id="content" cols="30" rows="10" v-model="content"></textarea>
+        <button @click="addText" id="add-textarea">click me</button>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                title: '',
+                content: ''
+            },
+            methods: {
+                addText() {
+                    return axios.post("/add", {
+                        content: this.content
+                    }, {
+                        headers: {
+                            'Content-type': 'application/json',
+                        }
+                    }).then((response) => {
+                        console.log("content: " + this.content);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
